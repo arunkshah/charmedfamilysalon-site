@@ -1,0 +1,25 @@
+# Charmed Family Salon static site, containerised behind the VPS's shared Traefik.
+# Traefik (host network, --providers.docker) auto-discovers this by its labels and
+# issues HTTPS via its "letsencrypt" resolver — mirrors the arnav-erp / KE apps.
+#
+# Deployed via the Hostinger API (VPS_createNewProjectV1) with this file's contents.
+# The image is built by Docker directly from the public GitHub repo (git context),
+# so no files need to be copied onto the VPS.
+services:
+  web:
+    build:
+      context: "https://github.com/arunkshah/charmedfamilysalon-site.git#main"
+      dockerfile: Dockerfile
+    image: charmedfamilysalon:latest
+    container_name: cfs_web
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cfs.entrypoints=websecure"
+      - "traefik.http.routers.cfs.rule=Host(`charmedfamilysalon.com`) || Host(`www.charmedfamilysalon.com`)"
+      - "traefik.http.routers.cfs.tls.certresolver=letsencrypt"
+      - "traefik.http.services.cfs.loadbalancer.server.port=80"
+
+networks:
+  default:
+    name: cfs_default

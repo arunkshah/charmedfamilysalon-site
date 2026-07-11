@@ -1,0 +1,10 @@
+# Charmed Family Salon — Security Policy
+# https://charmedfamilysalon.com/.well-known/security.txt
+# Standard: RFC 9116 (https://www.rfc-editor.org/rfc/rfc9116)
+
+Contact: mailto:charmedfamilysalon@gmail.com
+Contact: https://wa.me/918981965553
+Expires: 2027-06-30T23:59:59.000Z
+Preferred-Languages: en, hi, bn
+Canonical: https://charmedfamilysalon.com/.well-known/security.txt
+Policy: https://charmedfamilysalon.com/security-policy.html
