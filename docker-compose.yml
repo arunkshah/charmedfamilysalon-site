@@ -1,24 +1,43 @@
-# Charmed Family Salon static site, containerised behind the VPS's shared Traefik.
-# Traefik (host network, --providers.docker) auto-discovers this by its labels and
-# issues HTTPS via its "letsencrypt" resolver — mirrors the arnav-erp / KE apps.
-#
+# Charmed Family Salon static site, served behind the VPS's shared Traefik.
 # Deployed via the Hostinger API (VPS_createNewProjectV1) with this file's contents.
-# The image is built by Docker directly from the public GitHub repo (git context),
-# so no files need to be copied onto the VPS.
+#
+# Build-free design: a one-shot `content` container git-clones this public repo
+# into a shared volume and drops nginx.conf into a conf volume; stock nginx:alpine
+# then serves it. Uses only pullable public images (no on-VPS image build).
+# To update the live site: push to main, then redeploy the compose project
+# (the content container re-clones the latest commit on each deploy).
 services:
+  content:
+    image: alpine/git:latest
+    entrypoint: /bin/sh
+    command:
+      - -c
+      - "rm -rf /site/* /conf/* && git clone --depth 1 https://github.com/arunkshah/charmedfamilysalon-site.git /tmp/repo && cp -a /tmp/repo/. /site/ && cp /tmp/repo/nginx.conf /conf/default.conf && rm -rf /site/.git /site/Dockerfile /site/docker-compose.yml /site/nginx.conf /site/.dockerignore /site/.gitignore /site/.htaccess && echo CONTENT_READY"
+    volumes:
+      - site:/site
+      - conf:/conf
+    restart: "no"
+
   web:
-    build:
-      context: "https://github.com/arunkshah/charmedfamilysalon-site.git#main"
-      dockerfile: Dockerfile
-    image: charmedfamilysalon:latest
+    image: nginx:alpine
     container_name: cfs_web
     restart: unless-stopped
+    depends_on:
+      content:
+        condition: service_completed_successfully
+    volumes:
+      - site:/usr/share/nginx/html:ro
+      - conf:/etc/nginx/conf.d:ro
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.cfs.entrypoints=websecure"
       - "traefik.http.routers.cfs.rule=Host(`charmedfamilysalon.com`) || Host(`www.charmedfamilysalon.com`)"
       - "traefik.http.routers.cfs.tls.certresolver=letsencrypt"
       - "traefik.http.services.cfs.loadbalancer.server.port=80"
+
+volumes:
+  site:
+  conf:
 
 networks:
   default:
