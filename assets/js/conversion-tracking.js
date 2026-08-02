@@ -30,6 +30,18 @@
     window.gtag("event", eventName, params || {});
   }
 
+  // Meta (Facebook) Pixel — mirror the same high-intent actions so Meta ads
+  // can optimise on real enquiries and build a retargeting audience.
+  function sendMetaLead(contactMethod, label) {
+    if (typeof window.fbq !== "function") return;
+    window.fbq("track", "Lead", {
+      content_name: contactMethod,
+      content_category: label || "",
+      value: 1.0,
+      currency: "INR"
+    });
+  }
+
   document.addEventListener(
     "click",
     function (event) {
@@ -49,6 +61,7 @@
           link_url: rawHref,
           link_text: label
         });
+        sendMetaLead("WhatsApp", label);
         return;
       }
 
@@ -61,6 +74,7 @@
           link_url: rawHref,
           link_text: label
         });
+        sendMetaLead("Phone", label);
       }
     },
     true

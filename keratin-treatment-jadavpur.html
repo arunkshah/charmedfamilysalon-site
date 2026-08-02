@@ -1,26 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager (deferred for performance) -->
-  <script>
-    (function() {
-      var gtmLoaded = false;
-      function loadGTM() {
-        if (gtmLoaded) return;
-        gtmLoaded = true;
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-MG2HK6SF');
-      }
-      ['scroll','mousemove','touchstart','keydown'].forEach(function(e){
-        window.addEventListener(e, loadGTM, {passive:true, once:true});
-      });
-      setTimeout(loadGTM, 3000);
-    })();
-  </script>
-  <!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="geo.region" content="IN-WB">
   <meta name="geo.placename" content="Jadavpur, Kolkata">
@@ -60,6 +40,15 @@
         if (loaded) return;
         loaded = true;
         
+        var fbp = document.createElement('script');
+        fbp.text = "!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?"
+          + "n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;"
+          + "n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;"
+          + "t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}"
+          + "(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');"
+          + "fbq('init','1834855423224417');fbq('track','PageView');";
+        document.head.appendChild(fbp);
+        
         var gtm = document.createElement('script');
         gtm.async = true;
         gtm.src = 'https://www.googletagmanager.com/gtag/js?id=G-4WVWMB450P';
@@ -71,17 +60,13 @@
       }
       var triggerEvents = ['touchstart', 'scroll', 'mousemove', 'keydown'];
       triggerEvents.forEach(function(e) { window.addEventListener(e, loadDeferred, { passive: true, once: true }); });
-      setTimeout(loadDeferred, 4000);
+      setTimeout(loadDeferred, 1500);
     })();
   </script>
 
 </head>
 <body>
 <a href="#main-content" class="skip-link" style="position:absolute;top:-40px;left:0;background:var(--bronze,#b78746);color:#fff;padding:8px 16px;z-index:10000;border-radius:0 0 8px 0;font-size:14px;transition:top 0.2s;text-decoration:none;" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MG2HK6SF"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
 
 <header id="site-header"><div class="nav-bar"><div class="nav-inner"><a href="index.html" class="logo" aria-label="Charmed Family Salon - Home"><img src="Images/Logo/Coloured.webp" alt="Charmed Family Salon" width="214" height="48" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="logo-fallback">Charmed</span></a><nav class="main-nav" aria-label="Main navigation"><a href="index.html" data-nav="home">Home</a><a href="about.html" data-nav="about">About</a><a href="services.html" data-nav="services">Services</a><a href="gallery.html" data-nav="gallery">Gallery</a><a href="contact.html" data-nav="contact">Contact</a></nav><div class="header-actions"><a href="tel:+918981965553" class="header-call" aria-label="Call us"><i data-lucide="phone"></i></a><a href="https://wa.me/918981965553?text=Hi%2C%20I%20want%20to%20book%20a%20keratin%20treatment%20at%20Charmed%20Salon" class="header-cta" target="_blank" rel="noopener">Book Now</a></div><button class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false"><span></span><span></span><span></span></button></div></div></header>
 
