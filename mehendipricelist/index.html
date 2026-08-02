@@ -3,6 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  (function() {
+    var loaded = false;
+    function loadDeferred() {
+      if (loaded) return;
+      loaded = true;
+
+      var fbp = document.createElement('script');
+      fbp.text = "!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?"
+        + "n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;"
+        + "n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;"
+        + "t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}"
+        + "(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');"
+        + "fbq('init','1834855423224417');fbq('track','PageView');";
+      document.head.appendChild(fbp);
+
+      var gtm = document.createElement('script');
+      gtm.async = true;
+      gtm.src = 'https://www.googletagmanager.com/gtag/js?id=G-4WVWMB450P';
+      document.head.appendChild(gtm);
+
+      var gtmInline = document.createElement('script');
+      gtmInline.text = "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4WVWMB450P');gtag('config','AW-17677272567');";
+      document.head.appendChild(gtmInline);
+    }
+    ['touchstart','scroll','mousemove','keydown'].forEach(function(e) {
+      window.addEventListener(e, loadDeferred, { passive: true, once: true });
+    });
+    setTimeout(loadDeferred, 1500);
+  })();
+</script>
+<script src="/assets/js/conversion-tracking.js" defer></script>
 <title>Mehendi Beauty Parlour — Price List</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
