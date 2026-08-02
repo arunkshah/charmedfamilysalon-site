@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mehendi Beauty Parlour — Price List</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e2c06a;
+    --gold-dim: #a07830;
+    --bg-dark: #1a1714;
+    --bg-card: #211e1a;
+    --border: rgba(201,168,76,0.35);
+    --text-white: #f0ece4;
+    --text-muted: #b8b0a0;
+  }
+  body { background: var(--bg-dark); color: var(--text-white); font-family: 'Raleway', sans-serif; font-weight: 300; line-height: 1.6; }
+
+  /* Cover */
+  .cover { min-height: 100vh; background: radial-gradient(ellipse at 60% 40%, #2a2218 0%, #0e0c0a 70%); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .cover::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(135deg, transparent, transparent 80px, rgba(201,168,76,0.025) 80px, rgba(201,168,76,0.025) 81px); pointer-events: none; }
+  .logo-diamond { width: 260px; height: 260px; border: 1.5px solid var(--gold); transform: rotate(45deg); display: flex; align-items: center; justify-content: center; margin-bottom: 40px; }
+  .logo-inner { transform: rotate(-45deg); text-align: center; padding: 10px; }
+  .logo-name { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #c9a84c, #f0d87a, #c9a84c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+  .logo-icon { font-size: 1.4rem; color: var(--gold); margin-right: 6px; }
+  .logo-sub { font-size: 0.65rem; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-top: 2px; text-transform: uppercase; }
+  .logo-lines { display: flex; align-items: center; gap: 6px; justify-content: center; margin-top: 1px; }
+  .logo-lines span { height: 1px; width: 22px; background: var(--gold); display: block; }
+  .cover-tagline { font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--gold-dim); text-transform: uppercase; }
+
+  /* Nav */
+  nav { position: sticky; top: 0; z-index: 100; background: rgba(14,12,10,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 16px; overflow-x: auto; scrollbar-width: none; }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-inner { display: flex; min-width: max-content; margin: 0 auto; max-width: 1000px; }
+  nav a { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; padding: 13px 14px; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+  nav a:hover, nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* Layout */
+  .section { max-width: 1000px; margin: 0 auto; padding: 56px 24px 16px; }
+  .section-header { display: flex; align-items: flex-end; gap: 16px; margin-bottom: 28px; }
+  .section-title { font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 600; background: linear-gradient(135deg, #c9a84c, #f0d87a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; white-space: nowrap; }
+  .section-rule { flex: 1; height: 1px; background: linear-gradient(to right, var(--gold-dim), transparent); margin-bottom: 5px; }
+
+  /* Grid of cards */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 16px; }
+
+  /* Card */
+  .price-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; padding: 20px 22px; position: relative; overflow: hidden; }
+  .price-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(to bottom, var(--gold), transparent); }
+  .card-title { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+
+  /* Price rows */
+  .price-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .price-row:last-child { border-bottom: none; }
+  .service-name { font-size: 0.8rem; color: var(--text-white); }
+  .price-val { font-size: 0.8rem; font-weight: 500; color: var(--gold-light); white-space: nowrap; flex-shrink: 0; }
+
+  .section-divider { height: 1px; max-width: 1000px; margin: 0 auto; background: linear-gradient(to right, transparent, var(--border), transparent); }
+  .note { font-size: 0.68rem; color: var(--text-muted); font-style: italic; margin: 8px 0 24px 4px; }
+
+  /* Footer */
+  footer { background: #0e0c0a; border-top: 1px solid var(--border); padding: 48px 24px; text-align: center; }
+  .footer-logo { font-family: 'Cinzel', serif; font-size: 1.4rem; font-weight: 700; color: var(--gold); margin-bottom: 20px; }
+  .footer-phone { font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--gold-light); letter-spacing: 0.12em; margin-bottom: 20px; }
+  .footer-contact { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px 48px; margin-bottom: 20px; }
+  .footer-item { font-size: 0.76rem; color: var(--text-muted); }
+  .footer-item strong { color: var(--text-white); font-weight: 500; display: block; margin-bottom: 2px; }
+  .footer-copy { font-size: 0.62rem; color: var(--gold-dim); letter-spacing: 0.2em; text-transform: uppercase; }
+
+  @media (max-width: 600px) {
+    .section-title { font-size: 1.6rem; }
+    .logo-diamond { width: 210px; height: 210px; }
+    .logo-name { font-size: 1.6rem; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    @page { size: A4; margin: 10mm; }
+    body { background: var(--bg-dark); color: var(--text-white); -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 10px; }
+    .cover { display: none; }
+    nav { display: none; }
+    .section { padding: 15px 10px 5px; page-break-inside: avoid; break-inside: avoid; }
+    .card-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 5px; }
+    .price-card { padding: 12px 14px; }
+    .section-header { margin-bottom: 15px; }
+    .section-title { font-size: 1.2rem; }
+    .card-title { font-size: 0.55rem; margin-bottom: 8px; }
+    .service-name { font-size: 0.7rem; }
+    .price-val { font-size: 0.7rem; }
+    .section-divider { display: none; }
+    footer { padding: 20px 10px; border-top: none; }
+    .footer-logo { font-size: 1rem; margin-bottom: 10px; }
+    .footer-phone { font-size: 0.9rem; margin-bottom: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="logo-diamond">
+    <div class="logo-inner">
+      <div style="display:flex;align-items:center;justify-content:center;gap:4px">
+        <span class="logo-icon">✿</span>
+        <span class="logo-name">Mehendi</span>
+      </div>
+      <div class="logo-sub">Beauty</div>
+      <div class="logo-lines"><span></span><span></span></div>
+      <div class="logo-sub">Parlour</div>
+    </div>
+  </div>
+  <div class="cover-tagline">Price List</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#facial">Facials</a>
+    <a href="#hair-colour">Hair Colour</a>
+    <a href="#hair-spa">Hair Spa</a>
+    <a href="#hair-treatment">Hair Treatment</a>
+    <a href="#hair-style">Hair Style</a>
+    <a href="#waxing">Waxing</a>
+    <a href="#dtan">D-Tan & Bleach</a>
+    <a href="#cleanup">Clean-Up & Scrub</a>
+    <a href="#massage">Massage</a>
+    <a href="#mani-pedi">Manicure & Pedicure</a>
+    <a href="#makeup">Makeup</a>
+  </div>
+</nav>
+
+<!-- ══ FACIALS ══ -->
+<div id="facial" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Facials</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Basic Facials</div>
+      <div class="price-row"><span class="service-name">Starting from</span><span class="price-val">₹ 500/-</span></div>
+      <div class="price-row"><span class="service-name">Vedicline / Flawa / Massage</span><span class="price-val">₹ 550/– ₹ 850/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Premium Facials</div>
+      <div class="price-row"><span class="service-name">Starting from</span><span class="price-val">₹ 850/-</span></div>
+      <div class="price-row"><span class="service-name">Range (Lotus to Hydra)</span><span class="price-val">₹ 850/– ₹ 1,500/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Advance Facials</div>
+      <div class="price-row"><span class="service-name">Starting from</span><span class="price-val">₹ 1,900/-</span></div>
+      <div class="price-row"><span class="service-name">Range (Lotus to O3+)</span><span class="price-val">₹ 1,900/– ₹ 5,000/-</span></div>
+    </div>
+  </div>
+  <p class="note">* Includes Lotus, Shahnaz Gold, Anti-Aging, O3+ and more — ask for details</p>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ HAIR COLOUR ══ -->
+<div id="hair-colour" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Hair Colour</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Loreal</div>
+      <div class="price-row"><span class="service-name">Touch Up</span><span class="price-val">₹ 1,200/-</span></div>
+      <div class="price-row"><span class="service-name">Global / Starting</span><span class="price-val">₹ 1,500/-</span></div>
+      <div class="price-row"><span class="service-name">Per Streak / Highlight</span><span class="price-val">₹ 250/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Matrix</div>
+      <div class="price-row"><span class="service-name">Touch Up</span><span class="price-val">₹ 1,100/-</span></div>
+      <div class="price-row"><span class="service-name">Global / Starting</span><span class="price-val">₹ 1,400/-</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ HAIR SPA ══ -->
+<div id="hair-spa" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Hair Spa</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Hair Spa</div>
+      <div class="price-row"><span class="service-name">Starting from (Streak)</span><span class="price-val">₹ 700/-</span></div>
+      <div class="price-row"><span class="service-name">Loreal / Matrix / Optirepair</span><span class="price-val">₹ 1,000/– ₹ 1,300/-</span></div>
+      <div class="price-row"><span class="service-name">Keratin / Frenzy Follicles</span><span class="price-val">₹ 1,500/-</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ HAIR TREATMENT ══ -->
+<div id="hair-treatment" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Hair Treatment</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Treatments</div>
+      <div class="price-row"><span class="service-name">Ozone / Hair Fall</span><span class="price-val">₹ 200/– ₹ 800/-</span></div>
+      <div class="price-row"><span class="service-name">Dandruff</span><span class="price-val">₹ 1,200/-</span></div>
+      <div class="price-row"><span class="service-name">Molecular / Keratin</span><span class="price-val">₹ 2,500/– ₹ 3,000/-</span></div>
+      <div class="price-row"><span class="service-name">Botox</span><span class="price-val">₹ 4,000/-</span></div>
+      <div class="price-row"><span class="service-name">Straightening / Smoothing</span><span class="price-val">₹ 4,000/-</span></div>
+      <div class="price-row"><span class="service-name">Nanoplastia</span><span class="price-val">₹ 5,000/-</span></div>
+      <div class="price-row"><span class="service-name">Kera Smooth</span><span class="price-val">₹ 8,000/-</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ HAIR STYLE ══ -->
+<div id="hair-style" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Hair Style</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Styling</div>
+      <div class="price-row"><span class="service-name">Blow Dry</span><span class="price-val">₹ 250/-</span></div>
+      <div class="price-row"><span class="service-name">Straight Iron / Tong</span><span class="price-val">₹ 600/– ₹ 700/-</span></div>
+      <div class="price-row"><span class="service-name">Normal Bun</span><span class="price-val">₹ 800/-</span></div>
+      <div class="price-row"><span class="service-name">Advance Hair Style</span><span class="price-val">₹ 1,000/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Cutting</div>
+      <div class="price-row"><span class="service-name">Normal (Plane / Straight / Round / U)</span><span class="price-val">₹ 180/-</span></div>
+      <div class="price-row"><span class="service-name">Advance</span><span class="price-val">₹ 350/-</span></div>
+      <div class="price-row"><span class="service-name">Baby Cut</span><span class="price-val">₹ 250/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Shampoo</div>
+      <div class="price-row"><span class="service-name">Normal</span><span class="price-val">₹ 150/-</span></div>
+      <div class="price-row"><span class="service-name">Matrix</span><span class="price-val">₹ 200/-</span></div>
+      <div class="price-row"><span class="service-name">Loreal (with Conditioner)</span><span class="price-val">₹ 300/-</span></div>
+      <div class="price-row"><span class="service-name">Megha Smooth</span><span class="price-val">₹ 450/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Piercing</div>
+      <div class="price-row"><span class="service-name">Nose</span><span class="price-val">₹ 250/-</span></div>
+      <div class="price-row"><span class="service-name">Ear (Starting)</span><span class="price-val">₹ 350/– ₹ 1,200/-</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ WAXING ══ -->
+<div id="waxing" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Waxing</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Hands</div>
+      <div class="price-row"><span class="service-name">Normal – Half / Full + Underarms</span><span class="price-val">₹ 250/– ₹ 500/-</span></div>
+      <div class="price-row"><span class="service-name">Chocolate – Half / Full + Underarms</span><span class="price-val">₹ 300/– ₹ 600/-</span></div>
+      <div class="price-row"><span class="service-name">Rica – Half / Full + Underarms</span><span class="price-val">₹ 400/– ₹ 750/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Legs</div>
+      <div class="price-row"><span class="service-name">Normal – Half / Full</span><span class="price-val">₹ 400/– ₹ 490/-</span></div>
+      <div class="price-row"><span class="service-name">Chocolate – Half / Full</span><span class="price-val">₹ 500/– ₹ 550/-</span></div>
+      <div class="price-row"><span class="service-name">Rica – Half / Full</span><span class="price-val">₹ 600/– ₹ 900/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Underarms & Face</div>
+      <div class="price-row"><span class="service-name">Normal / Chocolate / Rica Underarms</span><span class="price-val">₹ 150/– ₹ 250/-</span></div>
+      <div class="price-row"><span class="service-name">Brazilian – Face</span><span class="price-val">₹ 450/-</span></div>
+      <div class="price-row"><span class="service-name">Upper Lip / Cheeks</span><span class="price-val">₹ 60/-</span></div>
+      <div class="price-row"><span class="service-name">Both Sides</span><span class="price-val">₹ 100/-</span></div>
+      <div class="price-row"><span class="service-name">Full Face</span><span class="price-val">₹ 350/-</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ D-TAN & BLEACH ══ -->
+<div id="dtan" class="section">
+  <div class="section-header">
+    <h2 class="section-title">D-Tan &amp; Bleach</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">D-Tan (Face)</div>
+      <div class="price-row"><span class="service-name">Starting from (Aroma)</span><span class="price-val">₹ 250/-</span></div>
+      <div class="price-row"><span class="service-name">Range (Raga / Oxylife / Lilium / O3+)</span><span class="price-val">₹ 350/– ₹ 500/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Bleach</div>
+      <div class="price-row"><span class="service-name">Fem Gold / Oxy (Face)</span><span class="price-val">₹ 290/– ₹ 300/-</span></div>
+      <div class="price-row"><span class="service-name">Forehead / Half Back</span><span class="price-val">₹ 150/– ₹ 270/-</span></div>
+      <div class="price-row"><span class="service-name">Full Hand / Full Back</span><span class="price-val">₹ 400/– ₹ 460/-</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ CLEAN-UP & SCRUB ══ -->
+<div id="cleanup" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Clean-Up &amp; Scrub</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Clean-Up</div>
+      <div class="price-row"><span class="service-name">Normal</span><span class="price-val">₹ 480/-</span></div>
+      <div class="price-row"><span class="service-name">Advance</span><span class="price-val">₹ 800/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Scrub</div>
+      <div class="price-row"><span class="service-name">Normal Face / Blackheads Remove</span><span class="price-val">₹ 200/-</span></div>
+      <div class="price-row"><span class="service-name">Nose / Half Back</span><span class="price-val">₹ 150/– ₹ 250/-</span></div>
+      <div class="price-row"><span class="service-name">Lotus / Hands / Full Back</span><span class="price-val">₹ 300/– ₹ 350/-</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ MASSAGE ══ -->
+<div id="massage" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Massage</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Oil Massage</div>
+      <div class="price-row"><span class="service-name">Normal / Premium</span><span class="price-val">₹ 250/– ₹ 350/-</span></div>
+      <div class="price-row"><span class="service-name">Hena / Protein Pack</span><span class="price-val">₹ 500/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Body Massage</div>
+      <div class="price-row"><span class="service-name">Hands / Half Back</span><span class="price-val">₹ 250/-</span></div>
+      <div class="price-row"><span class="service-name">Full Back / Foot Massage</span><span class="price-val">₹ 350/-</span></div>
+      <div class="price-row"><span class="service-name">Face Massage</span><span class="price-val">₹ 400/-</span></div>
+      <div class="price-row"><span class="service-name">Hand Polishing</span><span class="price-val">₹ 800/-</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ MANICURE & PEDICURE ══ -->
+<div id="mani-pedi" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Manicure &amp; Pedicure</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Pedicure</div>
+      <div class="price-row"><span class="service-name">Normal</span><span class="price-val">₹ 450/-</span></div>
+      <div class="price-row"><span class="service-name">Special</span><span class="price-val">₹ 500/-</span></div>
+      <div class="price-row"><span class="service-name">Premium</span><span class="price-val">₹ 550/-</span></div>
+      <div class="price-row"><span class="service-name">Nail File</span><span class="price-val">₹ 50/-</span></div>
+      <div class="price-row"><span class="service-name">Nail Polish</span><span class="price-val">₹ 30/-</span></div>
+    </div>
+    <div class="price-card">
+      <div class="card-title">Manicure</div>
+      <div class="price-row"><span class="service-name">Normal</span><span class="price-val">₹ 300/-</span></div>
+      <div class="price-row"><span class="service-name">Special</span><span class="price-val">₹ 350/-</span></div>
+      <div class="price-row"><span class="service-name">Lotus</span><span class="price-val">₹ 550/-</span></div>
+    </div>
+  </div>
+</div>
+<div class="section-divider"></div>
+
+<!-- ══ MAKEUP ══ -->
+<div id="makeup" class="section">
+  <div class="section-header">
+    <h2 class="section-title">Makeup</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="card-grid">
+    <div class="price-card">
+      <div class="card-title">Makeup Services</div>
+      <div class="price-row"><span class="service-name">Saree Draping</span><span class="price-val">₹ 300/-</span></div>
+      <div class="price-row"><span class="service-name">Face Makeup</span><span class="price-val">₹ 1,500/-</span></div>
+      <div class="price-row"><span class="service-name">Face Makeup + Saree Draping</span><span class="price-val">₹ 1,800/-</span></div>
+      <div class="price-row"><span class="service-name">Party Makeup (Starting)</span><span class="price-val">₹ 2,000/-</span></div>
+      <div class="price-row"><span class="service-name">Bridal Makeup – Indoor</span><span class="price-val">₹ 5,000/-</span></div>
+      <div class="price-row"><span class="service-name">Bridal Makeup – Outdoor</span><span class="price-val">₹ 7,000/-</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">✿ Mehendi Beauty Parlour</div>
+  <div class="footer-phone">+91 87774 80513</div>
+  <div class="footer-contact">
+    <div class="footer-item">
+      <strong>Hours</strong>
+      Open Daily · 10 am – 9 pm
+    </div>
+    <div class="footer-item">
+      <strong>Address</strong>
+      129, Anandapally Ln, Mahamaya Tala, Garia,<br>
+      Rajpur Sonarpur, Kolkata, WB 700084
+    </div>
+  </div>
+  <p class="footer-copy">© Mehendi Beauty Parlour — All rights reserved</p>
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('[id]');
+  const links = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
