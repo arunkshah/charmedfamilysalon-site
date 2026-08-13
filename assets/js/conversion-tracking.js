@@ -17,7 +17,9 @@
       {
         send_to: sendTo,
         value: 1.0,
-        currency: "INR"
+        currency: "INR",
+        // beacon survives the page navigating away to WhatsApp/dialler mid-send
+        transport_type: "beacon"
       },
       params || {}
     );
@@ -27,7 +29,7 @@
 
   function sendAnalyticsEvent(eventName, params) {
     if (typeof window.gtag !== "function") return;
-    window.gtag("event", eventName, params || {});
+    window.gtag("event", eventName, Object.assign({ transport_type: "beacon" }, params || {}));
   }
 
   // Meta (Facebook) Pixel — mirror the same high-intent actions so Meta ads

@@ -78,6 +78,16 @@
     @media (max-width: 560px) { .team-grid { grid-template-columns: 1fr; } }
   </style>
 
+  <!-- gtag stub must stay synchronous: conversion-tracking.js drops WhatsApp/phone tap
+       conversions fired before window.gtag exists (98% of traffic is mobile, first tap
+       is often the conversion). Only the gtag.js library download is deferred. -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-4WVWMB450P');
+    gtag('config', 'AW-17677272567');
+  </script>
   <script>
     (function() {
       var loaded = false;
@@ -98,10 +108,6 @@
         gtm.async = true;
         gtm.src = 'https://www.googletagmanager.com/gtag/js?id=G-4WVWMB450P';
         document.head.appendChild(gtm);
-        
-        var gtmInline = document.createElement('script');
-        gtmInline.text = "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-4WVWMB450P');gtag('config','AW-17677272567');";
-        document.head.appendChild(gtmInline);
       }
       var triggerEvents = ['touchstart', 'scroll', 'mousemove', 'keydown'];
       triggerEvents.forEach(function(e) { window.addEventListener(e, loadDeferred, { passive: true, once: true }); });
