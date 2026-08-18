@@ -1023,3 +1023,39 @@ svg.brand-icon {
   border: 0;
 }
 
+
+/* ─── INLINE BOOKING FORM (service landing pages) ──────────────── */
+.jbf-wrap { max-width: 620px; margin: 0 auto; }
+.jbf-card {
+  background: var(--cream); border: 1px solid var(--cream2);
+  border-radius: 16px; padding: 34px 30px;
+  box-shadow: 0 10px 40px rgba(30,28,26,0.06);
+}
+.jbf-title { font-family: var(--serif); font-size: 30px; font-weight: 600; margin: 0 0 6px; color: var(--text); }
+.jbf-title em { color: var(--bronze); font-style: italic; }
+.jbf-sub { font-family: var(--sans); font-size: 15px; color: #6b645c; margin: 0 0 22px; line-height: 1.5; }
+.jbf-row { display: flex; gap: 12px; margin-bottom: 12px; }
+.jbf-row input { flex: 1; min-width: 0; }
+.js-booking-form input {
+  width: 100%; padding: 13px 15px; font-family: var(--sans); font-size: 15px;
+  border: 1px solid #ddd4c4; border-radius: 9px; background: #fff; color: var(--text);
+  box-sizing: border-box; transition: border-color 0.15s;
+}
+.js-booking-form input:focus { outline: none; border-color: var(--bronze); }
+.jbf-date { width: 100%; margin-bottom: 12px; color: #6b645c; }
+.jbf-error { display: none; color: #c0392b; font-family: var(--sans); font-size: 13.5px; margin: 2px 0 12px; }
+.jbf-submit { width: 100%; justify-content: center; margin-top: 4px; }
+.jbf-note { font-family: var(--sans); font-size: 13.5px; color: #6b645c; text-align: center; margin: 14px 0 0; }
+.jbf-note a { color: var(--bronze); font-weight: 600; text-decoration: none; }
+.jbf-success { display: none; text-align: center; padding: 20px 10px; }
+.jbf-success-ic {
+  width: 56px; height: 56px; margin: 0 auto 14px; border-radius: 50%;
+  background: #25D366; color: #fff; font-size: 30px; line-height: 56px; font-weight: 700;
+}
+.jbf-success h3 { font-family: var(--serif); font-size: 24px; color: var(--text); margin: 0 0 8px; }
+.jbf-success p { font-family: var(--sans); font-size: 15px; color: #6b645c; line-height: 1.55; margin: 0; }
+@media (max-width: 560px) {
+  .jbf-row { flex-direction: column; gap: 12px; }
+  .jbf-card { padding: 26px 20px; }
+  .jbf-title { font-size: 26px; }
+}

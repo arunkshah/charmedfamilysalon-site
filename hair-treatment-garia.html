@@ -305,6 +305,31 @@
   </div>
 </section>
 
+<!-- QUICK BOOKING FORM -->
+<section class="section-block" aria-label="Request a booking online">
+  <div class="jbf-wrap">
+    <div class="jbf-card">
+      <h2 class="jbf-title">Book Your <em>Hair Treatment</em></h2>
+      <p class="jbf-sub">Leave your name and number — we'll confirm your slot on WhatsApp, usually within minutes.</p>
+      <form class="js-booking-form" data-service="Hair Treatment / Keratin" novalidate>
+        <div class="jbf-row">
+          <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
+          <input type="tel" name="phone" placeholder="10-digit mobile number" autocomplete="tel" inputmode="numeric" maxlength="10" required>
+        </div>
+        <input type="date" name="date" class="jbf-date" aria-label="Preferred date (optional)">
+        <div class="jbf-error" role="alert"></div>
+        <button type="submit" class="btn-dark jbf-submit">Request Booking <i data-lucide="arrow-right"></i></button>
+        <p class="jbf-note">Prefer to talk? <a href="tel:+918981965553">Call 89819 65553</a></p>
+      </form>
+      <div class="jbf-success" role="status">
+        <div class="jbf-success-ic">&#10003;</div>
+        <h3>Thank you!</h3>
+        <p>We've got your details and opened WhatsApp so you can send them instantly. We'll confirm your slot shortly.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta-banner" aria-label="Book hair treatment">
   <h2>Book Your <em>Hair Treatment</em> Today</h2>
@@ -368,5 +393,6 @@
   </a>
 </div>
 <script src="assets/js/conversion-tracking.js" defer></script>
+<script src="assets/js/booking-form.js" defer></script>
 </body>
 </html>
