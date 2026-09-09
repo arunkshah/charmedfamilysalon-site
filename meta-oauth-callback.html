@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Meta OAuth Callback | Charmed Family Salon</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #282423;
+      color: #faf0a3;
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+
+    main {
+      width: min(90vw, 560px);
+    }
+
+    p {
+      color: #f3deb2;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Connecting Meta</h1>
+    <p id="status">Sending the secure login response back to the local setup helper...</p>
+  </main>
+  <script>
+    const statusEl = document.getElementById("status");
+    const callbackUrl = new URL("http://localhost:8788/callback");
+    callbackUrl.search = window.location.search;
+    callbackUrl.hash = window.location.hash;
+
+    if (!window.location.hash.includes("access_token") && !window.location.search.includes("error")) {
+      statusEl.textContent = "No Meta login response was found. Please restart the local connection helper.";
+    } else {
+      window.location.replace(callbackUrl.toString());
+    }
+  </script>
+</body>
+</html>
