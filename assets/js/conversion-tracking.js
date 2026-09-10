@@ -9,9 +9,36 @@
 
   var WHATSAPP_CONVERSION = "AW-17677272567/6BUGCLy-7MAcEPeLl-1B";
   var PHONE_CONVERSION = "AW-17677272567/4ufZCIujptIcEPeLl-1B";
+  var GOOGLE_TAG_ID = "AW-17677272567";
+  var GA4_TAG_ID = "G-4WVWMB450P";
+
+  function ensureGoogleTag() {
+    window.dataLayer = window.dataLayer || [];
+
+    if (typeof window.gtag !== "function") {
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+    }
+
+    if (!window.__cfsGoogleTagConfigured) {
+      window.__cfsGoogleTagConfigured = true;
+      window.gtag("js", new Date());
+      window.gtag("config", GA4_TAG_ID);
+      window.gtag("config", GOOGLE_TAG_ID);
+    }
+
+    if (!window.__cfsGoogleTagScriptLoaded && !document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
+      window.__cfsGoogleTagScriptLoaded = true;
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(GOOGLE_TAG_ID);
+      document.head.appendChild(script);
+    }
+  }
 
   function sendGoogleAdsConversion(sendTo, params) {
-    if (typeof window.gtag !== "function") return;
+    ensureGoogleTag();
 
     var payload = Object.assign(
       {
@@ -28,7 +55,7 @@
   }
 
   function sendAnalyticsEvent(eventName, params) {
-    if (typeof window.gtag !== "function") return;
+    ensureGoogleTag();
     window.gtag("event", eventName, Object.assign({ transport_type: "beacon" }, params || {}));
   }
 
