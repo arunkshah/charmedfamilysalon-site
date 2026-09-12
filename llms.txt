@@ -53,6 +53,7 @@ Garia (primary location), and clients regularly travel from: Sonarpur, Narendrap
 ## Location-focused pages (nearby neighbourhoods served)
 
 - [Salon near Sonarpur](https://charmedfamilysalon.com/salon-sonarpur.html)
+- [Salon near Boral](https://charmedfamilysalon.com/salon-boral.html)
 - [Salon near Narendrapur](https://charmedfamilysalon.com/salon-narendrapur.html)
 - [Salon near Baghajatin](https://charmedfamilysalon.com/salon-baghajatin.html)
 - [Salon near Patuli](https://charmedfamilysalon.com/salon-patuli.html)
