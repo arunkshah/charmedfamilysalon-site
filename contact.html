@@ -566,7 +566,18 @@
     document.getElementById('form-wrap').style.display = 'none';
     document.getElementById('success-msg').style.display = 'block';
 
-    // Push event to GTM dataLayer for tracking
+    // Google Ads "Booking form submission" conversion (+ GA4 + Meta Lead).
+    // Defined by assets/js/conversion-tracking.js.
+    if (typeof window.cfsTrackBookingFormSubmission === 'function') {
+      window.cfsTrackBookingFormSubmission({
+        service: service,
+        location: location.pathname,
+        phone: phone,  // enhanced conversions; both are hashed by gtag before sending
+        email: email
+      });
+    }
+
+    // Legacy dataLayer push — inert while no GTM container is installed.
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       'event': 'appointment_form_submission'
@@ -592,7 +603,7 @@
     <img src="assets/icons/wa.svg" class="wa-img" width="18" height="18" alt="" aria-hidden="true" loading="lazy"> Book Appointment
   </a>
 </div>
-<script src="assets/js/conversion-tracking.js" defer></script>
+<script src="assets/js/conversion-tracking.js?v=20260929" defer></script>
 </body>
 </html>
 

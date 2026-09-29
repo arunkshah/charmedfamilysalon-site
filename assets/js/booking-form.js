@@ -63,7 +63,19 @@
           form.style.display = "none";
           if (ok) ok.style.display = "block";
 
-          // Mirror the contact form's tracking event.
+          // Google Ads "Booking form submission" conversion (+ GA4 + Meta Lead).
+          // Fired before the WhatsApp fallback opens so the beacon is queued while
+          // this page is still the active document.
+          if (typeof window.cfsTrackBookingFormSubmission === "function") {
+            window.cfsTrackBookingFormSubmission({
+              service: service,
+              location: location.pathname,
+              phone: phone // enhanced conversions; hashed by gtag before sending
+            });
+          }
+
+          // Legacy dataLayer push — inert while no GTM container is installed,
+          // kept so a future container can pick the same event up.
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: "appointment_form_submission", form_service: service });
 
