@@ -171,6 +171,18 @@
       background: var(--bronze); color: #fff; padding: 3px 10px; border-radius: 20px;
     }
 
+    /* CRAWLABLE SERVICE GUIDES */
+    .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .guide-card {
+      display: block; background: #fff; border: 1px solid rgba(183,135,70,0.2);
+      border-radius: 8px; padding: 24px; color: var(--text); text-decoration: none;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .guide-card:hover { transform: translateY(-3px); border-color: var(--bronze); box-shadow: 0 12px 28px rgba(30,28,26,0.07); }
+    .guide-card h3 { font-family: var(--serif); font-size: 23px; font-weight: 500; margin-bottom: 8px; }
+    .guide-card p { color: var(--muted); font-size: 13px; line-height: 1.65; margin-bottom: 14px; }
+    .guide-card span { color: var(--bronze); font-size: 12px; font-weight: 500; letter-spacing: 0.04em; }
+
     /* CTA STRIP */
     .cta-strip { background: var(--bronze); padding: 70px 40px; text-align: center; }
     .cta-strip h2 { font-family: var(--serif); font-size: clamp(26px, 3.5vw, 44px); color: var(--dark); margin-bottom: 8px; }
@@ -450,6 +462,27 @@
   </div>
 </section>
 
+<!-- SERVICE GUIDES AND CURRENT BOOKING PAGES -->
+<section class="svc mens" aria-labelledby="service-guides-title">
+  <div class="section-inner-sm">
+    <div class="svc-header">
+      <div class="svc-icon" aria-hidden="true"><i data-lucide="book-open"></i></div>
+      <div>
+        <h2 id="service-guides-title">Service <em>Guides &amp; Offers</em></h2>
+        <p class="svc-desc">Compare treatments, starting prices and current booking details before choosing your appointment.</p>
+      </div>
+    </div>
+    <div class="guide-grid">
+      <a class="guide-card" href="family-salon-offer-garia.html"><h3>Family Salon in Garia</h3><p>Hair, grooming, skin and makeup options for men, women and kids.</p><span>View family salon guide →</span></a>
+      <a class="guide-card" href="hair-spa-offer-garia.html"><h3>Hair Spa</h3><p>Options for dry, rough, colour-treated and frizz-prone hair.</p><span>View hair spa guide →</span></a>
+      <a class="guide-card" href="keratin-smoothening-offer-garia.html"><h3>Keratin &amp; Smoothening</h3><p>Compare frizz-control and straightening treatments before consultation.</p><span>View treatment guide →</span></a>
+      <a class="guide-card" href="nanoplastia-offer-garia.html"><h3>Nanoplastia</h3><p>Consultation-led smoothing for shine, manageability and frizz control.</p><span>View Nanoplastia guide →</span></a>
+      <a class="guide-card" href="hydra-facial-offer-garia.html"><h3>Hydra Facial</h3><p>Deep-cleansing and hydration details, price guidance and booking FAQs.</p><span>View facial guide →</span></a>
+      <a class="guide-card" href="bridal-makeup-offer-garia.html"><h3>Bridal &amp; Party Makeup</h3><p>Makeup, hair and draping options for weddings, receptions and functions.</p><span>View makeup guide →</span></a>
+    </div>
+  </div>
+</section>
+
 <div class="cta-strip">
   <h2>Ready to Book Your Appointment?</h2>
   <p>WhatsApp us and we'll confirm your slot within minutes.</p>
@@ -564,7 +597,6 @@
 <script src="assets/js/conversion-tracking.js?v=20260929" defer></script>
 </body>
 </html>
-
 
 
 
