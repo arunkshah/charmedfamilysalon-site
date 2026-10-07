@@ -10,4 +10,5 @@ COPY . /usr/share/nginx/html/
 # Keep deploy/build files and Apache-only config out of the web root
 RUN cd /usr/share/nginx/html \
  && rm -f Dockerfile docker-compose.yml nginx.conf .dockerignore .htaccess .DS_Store \
+ && rm -rf scripts .github \
  && find . -name '.DS_Store' -delete

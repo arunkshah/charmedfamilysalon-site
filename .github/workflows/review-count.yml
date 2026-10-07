@@ -1,0 +1,71 @@
+# Keeps the Google rating + review count on the site in sync with Google, daily.
+# Script: scripts/update_review_count.py (only touches the known rating/count spots).
+#
+# Secrets:
+#   GOOGLE_PLACES_API_KEY  Places API (New) key, restricted to that API
+#   GOOGLE_PLACE_ID        the salon's Place ID (get it once: Run workflow -> find_place = true)
+#   DEPLOY_SSH_KEY / DEPLOY_KNOWN_HOSTS / DEPLOY_HOST
+#                          key that can ONLY queue a Coolify redeploy (forced command
+#                          /usr/local/bin/charmed-redeploy on the VPS)
+name: Update Google review count
+
+on:
+  schedule:
+    - cron: "30 0 * * *"   # 06:00 IST daily
+  workflow_dispatch:
+    inputs:
+      find_place:
+        description: "Only look up and print the salon's Place ID (one-time setup)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: review-count
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Find Place ID (setup only)
+        if: ${{ inputs.find_place }}
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: python3 scripts/update_review_count.py --find
+
+      - name: Update rating and review count
+        if: ${{ !inputs.find_place }}
+        id: update
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
+        run: python3 scripts/update_review_count.py
+
+      - name: Commit and push
+        if: ${{ steps.update.outputs.changed == 'true' }}
+        run: |
+          git config user.name "charmed-review-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A -- '*.html' llms.txt
+          git commit -m "Update Google reviews: ${{ steps.update.outputs.summary }}"
+          git push
+
+      - name: Redeploy site
+        if: ${{ steps.update.outputs.changed == 'true' }}
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key && chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          # The key's forced command queues the redeploy; any command sent here is ignored.
+          ssh -i ~/.ssh/deploy_key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o BatchMode=yes "root@$DEPLOY_HOST" redeploy
+          rm -f ~/.ssh/deploy_key
