@@ -15,8 +15,8 @@ Options -Indexes
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  # Block AI Bots / Crawlers to save bandwidth and prevent model training
-  RewriteCond %{HTTP_USER_AGENT} (GPTBot|ChatGPT-User|ClaudeBot|Google-Extended|Applebot-Extended|CCBot|PerplexityBot|cohere-ai|Omgilibot|Diffbot|Bytespider|ImagesiftBot|Amazonbot|FacebookBot) [NC]
+  # Block AI model-training crawlers only (AI search/answer bots allowed — see robots.txt)
+  RewriteCond %{HTTP_USER_AGENT} (GPTBot|ClaudeBot|CCBot|Applebot-Extended|Bytespider|cohere-ai|cohere-training-data-crawler|Omgilibot|Diffbot|ImagesiftBot|Amazonbot|FacebookBot|meta-externalagent) [NC]
   RewriteRule ^ - [F,L]
 
   # Force HTTPS
