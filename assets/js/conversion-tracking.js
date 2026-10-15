@@ -15,6 +15,9 @@
   var BOOKING_FORM_CONVERSION = "AW-17677272567/WQXYCLm-7MAcEPeLl-1B";
   var GOOGLE_TAG_ID = "AW-17677272567";
   var GA4_TAG_ID = "G-4WVWMB450P";
+  // Owner-accessible GA4 property (Charmed Gmail). The legacy ID above belongs
+  // to a property none of the owner's logins can open; both receive data.
+  var GA4_OWNER_TAG_ID = "G-WS33VM2WDN";
 
   function ensureGoogleTag() {
     window.dataLayer = window.dataLayer || [];
@@ -33,6 +36,7 @@
       window.__cfsGoogleTagConfigured = true;
       window.gtag("js", new Date());
       window.gtag("config", GA4_TAG_ID);
+      window.gtag("config", GA4_OWNER_TAG_ID);
       window.gtag("config", GOOGLE_TAG_ID);
     }
 
